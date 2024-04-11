@@ -11,10 +11,7 @@ public class CommandProcessorAL extends CommandProcessor {
     @Override
     protected void executeCommand(Command command) {
         switch (command.getCommandType()) {
-            case READ_FILENAME -> {
-                readFile((ReadFilenameCommand)command);
-                break;
-            }
+            case READ_FILENAME -> readFile((ReadFilenameCommand)command);
             case SHOW_COUNTRY_WEEK -> {
                 ShowCountryWeekCommand showCountryWeekCommand = (ShowCountryWeekCommand)command;
                 var country = showCountryWeekCommand.getCountry();
@@ -22,7 +19,6 @@ public class CommandProcessorAL extends CommandProcessor {
                     System.out.println("There is no such country in the data file: " + country);
                 else
                     printCasesRow(showCountryWeekCommand.getCountry(), showCountryWeekCommand.getWeek());
-                break;
             }
             case SHOW_COUNTRY -> {
                 ShowCountryCommand showCountryCommand = (ShowCountryCommand)command;
@@ -37,18 +33,12 @@ public class CommandProcessorAL extends CommandProcessor {
                         printCasesRow(country, new Week(year, week));
                     }
                 }
-                break;
             }
             case SHOW_WEEK -> {
                 ShowWeekCommand showWeekCommand = (ShowWeekCommand)command;
                 for (String country : completeData.getAllCountriesAL()) {
                     printCasesRow(country, showWeekCommand.getWeek());
                 }
-                break;
-            }
-            // Default is used just in case, to be sure that all enum values are covered
-            case default, QUIT -> {
-                break;
             }
         }
         System.out.println("Command with ArrayList data executed.");

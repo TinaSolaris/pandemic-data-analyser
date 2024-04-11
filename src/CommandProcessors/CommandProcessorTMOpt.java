@@ -13,7 +13,6 @@ public class CommandProcessorTMOpt extends CommandProcessor {
         switch (command.getCommandType()) {
             case READ_FILENAME -> {
                 readFile((ReadFilenameCommand)command);
-                break;
             }
             case SHOW_COUNTRY_WEEK -> {
                 ShowCountryWeekCommand showCountryWeekCommand = (ShowCountryWeekCommand)command;
@@ -22,7 +21,6 @@ public class CommandProcessorTMOpt extends CommandProcessor {
                     System.out.println("There is no such country in the data file: " + country);
                 else
                     printCasesRow(country, showCountryWeekCommand.getWeek());
-                break;
             }
             case SHOW_COUNTRY -> {
                 ShowCountryCommand showCountryCommand = (ShowCountryCommand)command;
@@ -37,18 +35,12 @@ public class CommandProcessorTMOpt extends CommandProcessor {
                         printCasesRow(country, new Week(year, week));
                     }
                 }
-                break;
             }
             case SHOW_WEEK -> {
                 ShowWeekCommand showWeekCommand = (ShowWeekCommand)command;
                 for (String country : completeData.getAllCountriesTMOpt()) {
                     printCasesRow(country, showWeekCommand.getWeek());
                 }
-                break;
-            }
-            // Default is used just in case, to be sure that all enum values are covered
-            case default, QUIT -> {
-                break;
             }
         }
         System.out.println("Command with TreeMapOpt data executed.");
